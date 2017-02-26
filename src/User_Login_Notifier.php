@@ -10,25 +10,6 @@ class User_Login_Notifier
     }
 
     /**
-     * Callback triggered after a successful user login.
-     *
-     * @param string $user_login
-     * @param \WP_User $user
-     */
-    public function send_email($user_login, $user)
-    {
-        
-        
-//        exit;
-        
-        wp_mail(
-            $user->user_email,
-            $this->email_subject(),
-            $this->replace_placeholders($this->email_body(), $user)
-        );
-    }
-
-    /**
      * Email subject or title.
      *
      * @return mixed
@@ -49,6 +30,21 @@ class User_Login_Notifier
 Hi {firstname} {lastname}, we just thought you should know someone logged in to your account with username {username}.
 IF this is you, ignore this message otherwise contact us immediately via contact@website.com
 BODY;
+    }
+
+    /**
+     * Callback triggered after a successful user login.
+     *
+     * @param string $user_login
+     * @param \WP_User $user
+     */
+    public function send_email($user_login, $user)
+    {
+        wp_mail(
+            $user->user_email,
+            $this->email_subject(),
+            $this->replace_placeholders($this->email_body(), $user)
+        );
     }
 
     /**

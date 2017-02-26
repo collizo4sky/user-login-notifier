@@ -45,4 +45,12 @@ class User_Login_NotifierTest extends \WP_UnitTestCase
 
         self::$class_instance->send_email('collins', self::$current_user);
     }
+
+    public function test_get_instance()
+    {
+        $this->assertInstanceOf(
+            'SemaphoreApp\User_Login_Notifier',
+            self::$class_instance
+        );
+    }
 }
