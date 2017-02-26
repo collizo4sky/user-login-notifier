@@ -28,7 +28,7 @@ class User_Login_Notifier
     {
         return <<<BODY
 Hi {firstname} {lastname}, we just thought you should know someone logged in to your account with username {username}.
-IF this is you, ignore this message otherwise contact us immediately via contact@website.com
+IF this is you, ignore this message otherwise contact us immediately via contact@website.com    
 BODY;
     }
 
