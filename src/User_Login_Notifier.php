@@ -4,7 +4,6 @@ namespace SemaphoreApp;
 
 class User_Login_Notifier
 {
-
     public function __construct()
     {
         add_action('wp_login', array($this, 'send_email'), 10, 2);
@@ -18,17 +17,38 @@ class User_Login_Notifier
      */
     public function send_email($user_login, $user)
     {
-        $subject = __('Someone logged in to your account. Is this you?');
+        
+        
+//        exit;
+        
+        wp_mail(
+            $user->user_email,
+            $this->email_subject(),
+            $this->replace_placeholders($this->email_body(), $user)
+        );
+    }
 
-        $body = <<<BODY
+    /**
+     * Email subject or title.
+     *
+     * @return mixed
+     */
+    public function email_subject()
+    {
+        return __('Someone logged in to your account. Is this you?');
+    }
+
+    /**
+     * Email subject or title.
+     *
+     * @return mixed
+     */
+    public function email_body()
+    {
+        return <<<BODY
 Hi {firstname} {lastname}, we just thought you should know someone logged in to your account with username {username}.
 IF this is you, ignore this message otherwise contact us immediately via contact@website.com
 BODY;
-        wp_mail(
-            $user->user_email,
-            $subject,
-            $this->replace_placeholders($body, $user)
-        );
     }
 
     /**
@@ -61,7 +81,6 @@ BODY;
      */
     public static function get_instance()
     {
-        var_dump('hello'); exit;
         static $instance = null;
 
         if (is_null($instance)) {

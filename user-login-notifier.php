@@ -12,4 +12,6 @@
 
 namespace SemaphoreApp;
 
+require 'vendor/autoload.php';
+
 User_Login_Notifier::get_instance();
