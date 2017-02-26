@@ -12,41 +12,29 @@ class User_Login_NotifierTest extends \WP_UnitTestCase
 {
     use PHPMock;
 
-    protected $backupGlobals = false;
+    /** @var User_Login_Notifier */
+    protected static $class_instance;
 
-    /**
-     * @var User_Login_Notifier
-     */
-    protected $class_instance;
+    /** @var \WP_User currently logged user. */
+    protected static $current_user;
 
-    /**
-     * @var \WP_User currently logged user.
-     */
-    protected $current_user;
-
-    public function setUp()
+    public static function setUpBeforeClass()
     {
         global $current_user;
-
-        $this->current_user = $current_user;
-        $this->class_instance = User_Login_Notifier::get_instance();
+        self::$current_user = $current_user;
+        self::$class_instance = User_Login_Notifier::get_instance();
     }
 
     public function test_replace_placeholders()
     {
-        $this->assertSame('collins', $this->class_instance->replace_placeholders('{username}', $this->current_user));
-        $this->assertSame('Admin', $this->class_instance->replace_placeholders('{firstname}', $this->current_user));
-        $this->assertSame('User', $this->class_instance->replace_placeholders('{lastname}', $this->current_user));
+        $this->assertSame('collins', self::$class_instance->replace_placeholders('{username}', self::$current_user));
+        $this->assertSame('Admin', self::$class_instance->replace_placeholders('{firstname}', self::$current_user));
+        $this->assertSame('User', self::$class_instance->replace_placeholders('{lastname}', self::$current_user));
 
-        return $this->current_user;
+        return self::$current_user;
     }
 
-
-    /**
-     * @depends test_replace_placeholders
-     * @param \WP_User $current_user
-     */
-    public function test_send_email($current_user)
+    public function test_send_email()
     {
         $time = $this->getFunctionMock('SemaphoreApp', "wp_mail");
         $time->expects($this->once())->with(
@@ -55,6 +43,6 @@ class User_Login_NotifierTest extends \WP_UnitTestCase
             $this->stringContains('we just thought you')
         );
 
-        $this->class_instance->send_email('collins', $current_user);
+        self::$class_instance->send_email('collins', self::$current_user);
     }
 }
