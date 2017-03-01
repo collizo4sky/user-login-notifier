@@ -11,5 +11,8 @@
   },
   "require-dev": {
     "php-mock/php-mock-phpunit": "1.1.2"
+  },
+  "require": {
+    "codeclimate/php-test-reporter": "^0.4.4"
   }
 }
