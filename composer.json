@@ -1,12 +1,12 @@
 {
   "autoload": {
     "psr-4": {
-      "SemaphoreApp\\": "src/"
+      "SitepointApp\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "SemaphoreApp\\Tests\\": "tests/"
+      "SitepointApp\\Tests\\": "tests/"
     }
   },
   "require-dev": {

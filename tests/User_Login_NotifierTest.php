@@ -1,8 +1,8 @@
 <?php
 
-namespace SemaphoreApp\Tests;
+namespace SitepointApp\Tests;
 
-use SemaphoreApp\User_Login_Notifier;
+use SitepointApp\User_Login_Notifier;
 use phpmock\phpunit\PHPMock;
 
 /**
@@ -36,7 +36,7 @@ class User_Login_NotifierTest extends \WP_UnitTestCase
 
     public function test_send_email()
     {
-        $time = $this->getFunctionMock('SemaphoreApp', "wp_mail");
+        $time = $this->getFunctionMock('SitepointApp', "wp_mail");
         $time->expects($this->once())->with(
             $this->stringContains('collins@wordpress.org'),
             $this->stringContains('Someone logged in'),
@@ -49,7 +49,7 @@ class User_Login_NotifierTest extends \WP_UnitTestCase
     public function test_get_instance()
     {
         $this->assertInstanceOf(
-            'SemaphoreApp\User_Login_Notifier',
+            'SitepointApp\User_Login_Notifier',
             self::$class_instance
         );
     }

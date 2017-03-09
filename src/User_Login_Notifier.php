@@ -1,9 +1,12 @@
 <?php
 
-namespace SemaphoreApp;
+namespace SitepointApp;
 
 class User_Login_Notifier
 {
+    /**
+     * All action and filter hook typically goes into the constructor magic method.
+     */
     public function __construct()
     {
         add_action('wp_login', array($this, 'send_email'), 10, 2);
@@ -16,7 +19,7 @@ class User_Login_Notifier
      */
     public function email_subject()
     {
-        return __('Someone logged in to your account. Is this you?');
+        return 'Someone logged in to your account. Is this you?';
     }
 
     /**
@@ -28,7 +31,7 @@ class User_Login_Notifier
     {
         return <<<BODY
 Hi {firstname} {lastname}, we just thought you should know someone logged in to your account with username {username}.
-IF this is you, ignore this message otherwise contact us immediately via contact@website.com    
+IF this is you, ignore this message otherwise contact us immediately via contact@website.com
 BODY;
     }
 

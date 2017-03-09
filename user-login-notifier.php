@@ -10,7 +10,7 @@
  *
  */
 
-namespace SemaphoreApp;
+namespace SitepointApp;
 
 require 'vendor/autoload.php';
 
